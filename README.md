@@ -1,8 +1,10 @@
 # Customer Churn Prediction and Business Analysis
 
-Predicts which telecom customers are likely to leave, explains the main reasons, and estimates the monthly revenue at risk. Includes a small Streamlit app to check the churn risk of a single customer.
+Predicts which telecom customers are likely to leave, explains the main reasons, and measures the monthly revenue lost to churn. Includes a small Streamlit app to check the churn risk of a single customer.
 
 **Tools:** Python · Pandas · NumPy · Matplotlib · Seaborn · Scikit-learn · Streamlit
+
+**Results:** 0.78 recall · 0.84 ROC-AUC · catches 293 of 374 churners · flags 82.4% of churners' monthly revenue
 
 ## Dataset
 IBM Telco Customer Churn – 7,043 customers, 21 columns (demographics, services, contract, billing, churn).
@@ -17,7 +19,6 @@ Source: [IBM/telco-customer-churn-on-icp4d](https://github.com/IBM/telco-custome
 6. Feature importance and business impact
 
 ## Key business findings
-_Fill in / check against your notebook output._
 
 | Finding | Value |
 |---|---|
@@ -25,7 +26,11 @@ _Fill in / check against your notebook output._
 | Churn rate: month-to-month vs two-year contract | 42.7% vs 2.8% |
 | Churn rate in first 12 months | 47.4% |
 | Churn rate: fiber optic / electronic check | 41.9% / 45.3% |
-| Monthly revenue from churned customers | $139,131 (30.5% of total) |
+| Monthly revenue lost to churned customers | $139,131 (30.5% of total) |
+
+![Churn rate by contract, internet service and payment method](docs/churn_by_category.png)
+
+![Churn rate by tenure](docs/churn_by_tenure.png)
 
 ## Model results (test set, 1,409 customers)
 
@@ -37,7 +42,18 @@ _Fill in / check against your notebook output._
 | **Tuned Logistic Regression** (C=0.1, balanced) | 0.74 | 0.51 | 0.78 | 0.62 | 0.841 |
 
 Metrics are for the churn class. Accuracy alone is misleading here: predicting "no churn" for everyone would already give about 73%.
-The tuned model catches 293 of 374 churners in the test set, covering 82.4% of their monthly revenue.
+The tuned model catches 293 of 374 churners in the test set, covering 82.4% of their monthly revenue. Random Forest has the highest accuracy but catches only about half of the churners, so Logistic Regression was chosen.
+
+![Confusion matrix of the tuned Logistic Regression](docs/confusion_matrix.png)
+
+## What drives churn
+
+From the tuned Logistic Regression coefficients:
+
+- **Increase churn:** fiber optic internet, electronic check payment, paperless billing, higher total charges
+- **Reduce churn:** two-year and one-year contracts, longer tenure, online security, tech support
+
+![Top features that increase or reduce churn](docs/top_features.png)
 
 ## Recommendations
 1. Offer incentives to move month-to-month customers to longer contracts

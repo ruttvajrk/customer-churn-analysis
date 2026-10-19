@@ -28,9 +28,9 @@ Source: [IBM/telco-customer-churn-on-icp4d](https://github.com/IBM/telco-custome
 | Churn rate: fiber optic / electronic check | 41.9% / 45.3% |
 | Monthly revenue lost to churned customers | $139,131 (30.5% of total) |
 
-![Churn rate by contract, internet service and payment method](docs/churn_by_category.png)
+![Churn rate by contract, internet service and payment method](Docs/churn_by_category_2.png)
 
-![Churn rate by tenure](docs/churn_by_tenure.png)
+![Churn rate by tenure](Docs/churn_by_tenure_2.png)
 
 ## Model results (test set, 1,409 customers)
 
@@ -44,7 +44,7 @@ Source: [IBM/telco-customer-churn-on-icp4d](https://github.com/IBM/telco-custome
 Metrics are for the churn class. Accuracy alone is misleading here: predicting "no churn" for everyone would already give about 73%.
 The tuned model catches 293 of 374 churners in the test set, covering 82.4% of their monthly revenue. Random Forest has the highest accuracy but catches only about half of the churners, so Logistic Regression was chosen.
 
-![Confusion matrix of the tuned Logistic Regression](docs/confusion_matrix.png)
+![Confusion matrix of the tuned Logistic Regression](Docs/confusion_matrix_2.png)
 
 ## What drives churn
 
@@ -53,7 +53,7 @@ From the tuned Logistic Regression coefficients:
 - **Increase churn:** fiber optic internet, electronic check payment, paperless billing, higher total charges
 - **Reduce churn:** two-year and one-year contracts, longer tenure, online security, tech support
 
-![Top features that increase or reduce churn](docs/top_features.png)
+![Top features that increase or reduce churn](Docs/top_features_2.png)
 
 ## Recommendations
 1. Offer incentives to move month-to-month customers to longer contracts

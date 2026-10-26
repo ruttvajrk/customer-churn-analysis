@@ -1,0 +1,33 @@
+{
+  "rows": 7043,
+  "churn_rate": 0.2654,
+  "customer_id_unique": true,
+  "customer_id_used_as_feature": false,
+  "exact_duplicate_feature_rows": 40,
+  "duplicate_rows_with_conflicting_label": 18,
+  "single_feature_auc": {
+    "tenure": 0.74,
+    "Contract": 0.739,
+    "OnlineSecurity": 0.705,
+    "TechSupport": 0.703,
+    "InternetService": 0.695,
+    "OnlineBackup": 0.678,
+    "DeviceProtection": 0.671,
+    "PaymentMethod": 0.671,
+    "TotalCharges": 0.65,
+    "MonthlyCharges": 0.621,
+    "StreamingMovies": 0.621,
+    "StreamingTV": 0.62,
+    "PaperlessBilling": 0.607,
+    "Partner": 0.585,
+    "Dependents": 0.585,
+    "SeniorCitizen": 0.563,
+    "MultipleLines": 0.523,
+    "gender": 0.505,
+    "PhoneService": 0.504
+  },
+  "single_feature_auc_above_0.90": [],
+  "corr_TotalCharges_vs_tenure_x_MonthlyCharges": 0.9996,
+  "note": "The dataset is one snapshot with no dates, so a time-based split is not possible; contract and service fields could have changed close to the churn date. This cannot be checked with this data.",
+  "test_rows_with_identical_feature_row_in_train": 13
+}

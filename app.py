@@ -1,19 +1,24 @@
-# Simple Streamlit app to predict if a customer will churn
-# Run: streamlit run app.py
+# Streamlit app: churn risk for one customer, using the same saved pipeline as the API.
+# Run:  pip install -e .  then  streamlit run app.py
 
-import streamlit as st
 import pandas as pd
-import joblib
+import streamlit as st
 
-model = joblib.load("churn_model.pkl")
-scaler = joblib.load("scaler.pkl")
-model_columns = joblib.load("model_columns.pkl")
+from churn.api import MODEL_DIR, ModelBundle
 
-st.title("Customer Churn Prediction")
-st.write("Enter customer details to check the churn risk.")
+
+@st.cache_resource
+def get_model() -> ModelBundle:
+    return ModelBundle(MODEL_DIR)
+
+
+model = get_model()
+
+st.title("Customer Churn Risk")
+st.caption(f"Model: {model.card['chosen_model']} · decision threshold "
+           f"{model.threshold:.2f} · test ROC-AUC {model.card['test']['roc_auc']:.3f}")
 
 col1, col2 = st.columns(2)
-
 with col1:
     gender = st.selectbox("Gender", ["Female", "Male"])
     senior = st.selectbox("Senior Citizen", ["No", "Yes"])
@@ -25,7 +30,6 @@ with col1:
     internet = st.selectbox("Internet Service", ["Fiber optic", "DSL", "No"])
     security = st.selectbox("Online Security", ["No", "Yes", "No internet service"])
     backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])
-
 with col2:
     protection = st.selectbox("Device Protection", ["No", "Yes", "No internet service"])
     support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"])
@@ -47,16 +51,14 @@ if st.button("Predict"):
         "StreamingMovies": movies, "Contract": contract, "PaperlessBilling": paperless,
         "PaymentMethod": payment, "MonthlyCharges": monthly, "TotalCharges": total,
     }])
+    prob = float(model.predict(customer)[0])
+    reasons = model.reasons(customer)[0]
 
-    # same encoding as in the notebook, then match the training columns
-    customer = pd.get_dummies(customer)
-    customer = customer.reindex(columns=model_columns, fill_value=0)
-    num_cols = ["tenure", "MonthlyCharges", "TotalCharges"]
-    customer[num_cols] = scaler.transform(customer[num_cols])
-
-    prob = model.predict_proba(customer)[0][1]
     st.metric("Churn probability", f"{prob * 100:.1f}%")
-    if prob >= 0.5:
-        st.error("High risk: this customer is likely to leave. Consider a retention offer.")
+    st.write(f"Expected monthly revenue at risk: **${prob * monthly:,.2f}**")
+    if prob >= model.threshold:
+        st.error("At risk: above the model's decision threshold. Consider a retention offer.")
     else:
-        st.success("Low risk: this customer is likely to stay.")
+        st.success("Below the decision threshold: likely to stay.")
+    if reasons:
+        st.write("Main factors raising the risk: " + ", ".join(reasons))

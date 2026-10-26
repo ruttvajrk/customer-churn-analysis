@@ -1,0 +1,191 @@
+{
+  "model_version": "2.0.0",
+  "created_utc": "2026-10-26T09:03:33+00:00",
+  "data_file": "Telco-Customer-Churn.csv",
+  "data_sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true,
+    "train_rows": 5634,
+    "test_rows": 1409
+  },
+  "chosen_model": "logistic_regression",
+  "selection_reason": "within 1 std of best (xgboost) and simpler",
+  "best_params": {
+    "model__C": 1
+  },
+  "decision_threshold": 0.32,
+  "threshold_rule": "max F1 on out-of-fold training predictions",
+  "thresholds_considered": {
+    "f1": 0.32,
+    "f2": 0.14
+  },
+  "cv": {
+    "cv_pr_auc_mean": 0.6615,
+    "cv_pr_auc_std": 0.0195,
+    "cv_roc_auc_mean": 0.8462,
+    "cv_roc_auc_std": 0.0126,
+    "cv_recall_mean": 0.5445,
+    "cv_recall_std": 0.0407,
+    "cv_precision_mean": 0.653,
+    "cv_precision_std": 0.0267,
+    "cv_f1_mean": 0.5932,
+    "cv_f1_std": 0.0299
+  },
+  "test": {
+    "threshold": 0.32,
+    "accuracy": 0.7573,
+    "precision": 0.5312,
+    "recall": 0.7273,
+    "f1": 0.614,
+    "f2": 0.6773,
+    "roc_auc": 0.842,
+    "pr_auc": 0.6336,
+    "tp": 272,
+    "fp": 240,
+    "fn": 102,
+    "tn": 795,
+    "brier_score": 0.1381,
+    "flagged_customers": 512,
+    "predicted_vs_actual_churners": [
+      377.2,
+      374
+    ],
+    "churners_in_test": 374,
+    "churners_caught": 272,
+    "share_of_churner_revenue_caught": 0.769
+  },
+  "test_at_threshold_0.5": {
+    "threshold": 0.5,
+    "accuracy": 0.8055,
+    "precision": 0.6572,
+    "recall": 0.5588,
+    "f1": 0.604,
+    "f2": 0.5761,
+    "roc_auc": 0.842,
+    "pr_auc": 0.6336,
+    "tp": 209,
+    "fp": 109,
+    "fn": 165,
+    "tn": 926
+  },
+  "reference_stats": {
+    "churn_rate": 0.2654,
+    "numeric": {
+      "tenure": {
+        "mean": 32.4851,
+        "std": 24.5687
+      },
+      "MonthlyCharges": {
+        "mean": 64.93,
+        "std": 30.1381
+      },
+      "TotalCharges": {
+        "mean": 2299.3347,
+        "std": 2279.2043
+      }
+    },
+    "categorical": {
+      "gender": {
+        "Male": 0.5028,
+        "Female": 0.4972
+      },
+      "Partner": {
+        "No": 0.5156,
+        "Yes": 0.4844
+      },
+      "Dependents": {
+        "No": 0.702,
+        "Yes": 0.298
+      },
+      "PhoneService": {
+        "Yes": 0.9008,
+        "No": 0.0992
+      },
+      "MultipleLines": {
+        "No": 0.4766,
+        "Yes": 0.4242,
+        "No phone service": 0.0992
+      },
+      "InternetService": {
+        "Fiber optic": 0.4407,
+        "DSL": 0.3438,
+        "No": 0.2155
+      },
+      "OnlineSecurity": {
+        "No": 0.4965,
+        "Yes": 0.2881,
+        "No internet service": 0.2155
+      },
+      "OnlineBackup": {
+        "No": 0.4334,
+        "Yes": 0.3511,
+        "No internet service": 0.2155
+      },
+      "DeviceProtection": {
+        "No": 0.4388,
+        "Yes": 0.3458,
+        "No internet service": 0.2155
+      },
+      "TechSupport": {
+        "No": 0.4918,
+        "Yes": 0.2927,
+        "No internet service": 0.2155
+      },
+      "StreamingTV": {
+        "No": 0.3951,
+        "Yes": 0.3894,
+        "No internet service": 0.2155
+      },
+      "StreamingMovies": {
+        "No": 0.3935,
+        "Yes": 0.391,
+        "No internet service": 0.2155
+      },
+      "Contract": {
+        "Month-to-month": 0.5506,
+        "Two year": 0.2412,
+        "One year": 0.2082
+      },
+      "PaperlessBilling": {
+        "Yes": 0.5912,
+        "No": 0.4088
+      },
+      "PaymentMethod": {
+        "Electronic check": 0.3356,
+        "Mailed check": 0.2283,
+        "Bank transfer (automatic)": 0.2208,
+        "Credit card (automatic)": 0.2153
+      }
+    }
+  },
+  "features": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges",
+    "SeniorCitizen",
+    "gender",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+  ],
+  "versions": {
+    "python": "3.13.17",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "pandas": "3.0.5"
+  },
+  "quick_mode": false
+}

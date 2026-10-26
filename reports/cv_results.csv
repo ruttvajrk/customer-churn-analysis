@@ -1,0 +1,5 @@
+model,best_params,cv_pr_auc_mean,cv_pr_auc_std,cv_roc_auc_mean,cv_roc_auc_std,cv_recall_mean,cv_recall_std,cv_precision_mean,cv_precision_std,cv_f1_mean,cv_f1_std
+baseline_prior,{},0.2654,0.0001,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+logistic_regression,"{""model__C"": 1}",0.6615,0.0195,0.8462,0.0126,0.5445,0.0407,0.653,0.0267,0.5932,0.0299
+random_forest,"{""model__max_depth"": null, ""model__min_samples_leaf"": 20}",0.6644,0.021,0.8483,0.01,0.4823,0.0144,0.6807,0.0327,0.5643,0.0173
+xgboost,"{""model__max_depth"": 2, ""model__min_child_weight"": 5, ""model__reg_lambda"": 5}",0.6726,0.0203,0.8505,0.0119,0.5318,0.0375,0.6699,0.0363,0.5925,0.0345

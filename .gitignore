@@ -2,3 +2,9 @@
 __pycache__/
 .ipynb_checkpoints/
 *.zip
+mlflow.db
+mlruns/
+mlartifacts/
+logs/
+*.egg-info/
+.pytest_cache/

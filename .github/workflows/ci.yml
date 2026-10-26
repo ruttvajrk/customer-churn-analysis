@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install
+        run: |
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - name: Unit tests (data checks)
+        run: pytest -q tests/test_data.py
+      - name: Quick retrain into a temp folder (smoke test of the whole pipeline)
+        run: python -m churn.train --quick --out /tmp/ci_run --mlflow-uri sqlite:////tmp/ci_run/mlflow.db
+      - name: API tests against the freshly trained model
+        run: MODEL_DIR=/tmp/ci_run/models pytest -q tests/test_model_and_api.py
+      - name: Build Docker image
+        run: docker build -t churn-api .

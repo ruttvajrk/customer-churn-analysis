@@ -1,8 +1,15 @@
-pandas
-numpy
-matplotlib
+# Training + serving (exact versions used to produce models/ and reports/)
+pandas==3.0.5
+numpy==2.5.3
+scikit-learn==1.9.1
+xgboost==3.4.1
+mlflow==3.17.2
+joblib==1.6.0
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.13.5
+# notebook + Streamlit app
+matplotlib==3.11.2
 seaborn
-scikit-learn
-joblib
 streamlit
 jupyter

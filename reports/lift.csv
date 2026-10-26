@@ -1,0 +1,6 @@
+top_pct_contacted,customers_contacted,churners_reached,share_of_churners,share_of_churned_revenue,churn_rate_in_group,lift_vs_random
+10,141,106,0.2834,0.3184,0.7518,2.83
+20,282,186,0.4973,0.5428,0.6596,2.49
+30,423,243,0.6497,0.6936,0.5745,2.17
+40,564,292,0.7807,0.8218,0.5177,1.95
+50,704,326,0.8717,0.8821,0.4631,1.74

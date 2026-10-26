@@ -1,0 +1,8 @@
+# Minimal set for the API container. scikit-learn must match the version the model was trained with.
+pandas==3.0.5
+numpy==2.5.3
+scikit-learn==1.9.1
+joblib==1.6.0
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.13.5
